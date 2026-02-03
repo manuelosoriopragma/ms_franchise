@@ -1,16 +1,12 @@
 server:
-  port: 8080
+  port: ${PORT}
 spring:
   application:
-    name: "ms_franchise"
+    name: ${APP_NAME}
   devtools:
     add-properties: false
-  h2:
-    console:
-      enabled: true
-      path: "/h2"
   profiles:
-    include: null
+    include: ${PROFILE}
 management:
   endpoints:
     web:
