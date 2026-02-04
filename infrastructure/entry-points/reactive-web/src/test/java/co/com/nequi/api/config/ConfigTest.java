@@ -1,6 +1,6 @@
 package co.com.nequi.api.config;
 
-import co.com.nequi.api.FranchiseHandler;
+import co.com.nequi.api.handler.FranchiseHandler;
 import co.com.nequi.api.RouterRest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

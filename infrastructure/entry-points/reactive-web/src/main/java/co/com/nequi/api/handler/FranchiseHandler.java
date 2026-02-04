@@ -1,11 +1,9 @@
-package co.com.nequi.api;
+package co.com.nequi.api.handler;
 
 import co.com.nequi.api.dto.FranchiseDto;
 import co.com.nequi.api.helper.ResponseUtil;
 import co.com.nequi.api.mapper.FranchiseMapper;
 import co.com.nequi.model.enums.ProcessMessage;
-import co.com.nequi.model.franchise.Franchise;
-import co.com.nequi.model.franchise.gateways.FranchiseGateway;
 import co.com.nequi.usecase.franchise.FranchiseUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,6 +17,7 @@ import reactor.core.publisher.Mono;
 public class FranchiseHandler {
 
     private final FranchiseUseCase useCase;
+
     public Mono<ServerResponse> createFranchise(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(FranchiseDto.class)
                 .map(FranchiseMapper::toDomain)

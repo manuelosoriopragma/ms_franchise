@@ -1,5 +1,6 @@
 package co.com.nequi.api;
 
+import co.com.nequi.api.handler.FranchiseHandler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
