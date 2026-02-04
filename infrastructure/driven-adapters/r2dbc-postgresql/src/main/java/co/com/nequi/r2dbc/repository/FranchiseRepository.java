@@ -1,4 +1,4 @@
-package co.com.nequi.r2dbc;
+package co.com.nequi.r2dbc.repository;
 
 import co.com.nequi.r2dbc.entity.FranchiseEntity;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;

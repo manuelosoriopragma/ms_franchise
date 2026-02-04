@@ -6,4 +6,5 @@ import lombok.experimental.UtilityClass;
 public class Constants {
 
     public static final String REQUIRED_NAME_VALDATION = "The name is a required field.";
+    public static final String REQUIRED_FRANCHISE_ID = "The franchise identifier is required";
 }
