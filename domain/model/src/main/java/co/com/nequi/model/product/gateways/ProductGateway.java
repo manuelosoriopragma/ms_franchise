@@ -5,4 +5,6 @@ import reactor.core.publisher.Mono;
 
 public interface ProductGateway {
     Mono<Product> save(Product product);
+    Mono<Product> findById(Long productId);
+    Mono<Void> deleteById(Long productId);
 }
