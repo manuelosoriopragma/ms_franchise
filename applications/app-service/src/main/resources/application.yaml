@@ -7,6 +7,10 @@ spring:
     add-properties: false
   profiles:
     active: ${PROFILE}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
 management:
   endpoints:
     web:

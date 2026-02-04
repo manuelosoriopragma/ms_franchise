@@ -1,5 +1,7 @@
 package co.com.nequi.r2dbc;
 
+import co.com.nequi.r2dbc.adapter.FranchiseAdapter;
+import co.com.nequi.r2dbc.repository.FranchiseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

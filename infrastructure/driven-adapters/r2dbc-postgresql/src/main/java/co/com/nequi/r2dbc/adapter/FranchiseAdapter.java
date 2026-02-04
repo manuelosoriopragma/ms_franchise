@@ -1,12 +1,12 @@
-package co.com.nequi.r2dbc;
+package co.com.nequi.r2dbc.adapter;
 
 import co.com.nequi.model.franchise.Franchise;
 import co.com.nequi.model.franchise.gateways.FranchiseGateway;
+import co.com.nequi.r2dbc.repository.FranchiseRepository;
 import co.com.nequi.r2dbc.entity.FranchiseEntity;
 import co.com.nequi.r2dbc.helper.ReactiveAdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
 
 @Repository
 public class FranchiseAdapter extends ReactiveAdapterOperations<
@@ -19,8 +19,4 @@ public class FranchiseAdapter extends ReactiveAdapterOperations<
         super(repository, mapper, d -> mapper.map(d, Franchise.class));
     }
 
-    @Override
-    public Mono<Franchise> saveFranchise(Franchise franchise) {
-        return this.save(franchise);
-    }
 }

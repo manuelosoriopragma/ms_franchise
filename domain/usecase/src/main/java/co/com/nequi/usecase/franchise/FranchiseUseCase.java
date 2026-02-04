@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 public record FranchiseUseCase(FranchiseGateway gateway) {
 
     public Mono<Franchise> saveFranchise(Franchise franchise){
-        return gateway.saveFranchise(franchise);
+        return gateway.save(franchise);
     }
 }

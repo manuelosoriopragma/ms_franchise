@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Builder
@@ -13,9 +14,11 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "franchises")
-public class FranchiseEntity{
+@Table(name = "branches")
+public class BranchEntity {
     @Id
     private Long id;
+    @Column("franchise_id")
+    private Long franchiseId;
     private String name;
 }
