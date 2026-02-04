@@ -1,6 +1,7 @@
 package co.com.nequi.api.handler;
 
 import co.com.nequi.api.dto.ProductDto;
+import co.com.nequi.api.dto.UpdateStockProductDto;
 import co.com.nequi.api.helper.ResponseUtil;
 import co.com.nequi.api.helper.ValidationUtil;
 
@@ -15,6 +16,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import static co.com.nequi.api.helper.Constants.FRANCHISE_ID_PARAM;
 import static co.com.nequi.api.helper.Constants.PRODUCT_ID_PARAM;
 
 @Component
@@ -44,5 +46,30 @@ public class ProductHandler {
                 .flatMap(response -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(response));
+    }
+
+    @Transactional
+    public Mono<ServerResponse> updateStock(ServerRequest serverRequest){
+        return serverRequest.bodyToMono(UpdateStockProductDto.class)
+                .flatMap(validationUtil::validate)
+                .map(ProductMapper::toDomain)
+                .flatMap(useCase::updateStock)
+                .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
+                .flatMap(response -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response));
+
+    }
+
+    public Mono<ServerResponse> findProductsWithMaxStockByFranchise(ServerRequest serverRequest){
+        final Long franchiseId = Long.parseLong(serverRequest.pathVariable(FRANCHISE_ID_PARAM));
+        return Mono.just(franchiseId)
+                .flatMapMany(useCase::findProductsWithMaxStockByFranchise)
+                .collectList()
+                .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
+                .flatMap(response -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response));
+
     }
 }
