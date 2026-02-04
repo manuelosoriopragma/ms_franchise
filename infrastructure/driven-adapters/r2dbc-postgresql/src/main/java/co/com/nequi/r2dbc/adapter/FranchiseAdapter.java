@@ -7,6 +7,7 @@ import co.com.nequi.r2dbc.entity.FranchiseEntity;
 import co.com.nequi.r2dbc.helper.ReactiveAdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class FranchiseAdapter extends ReactiveAdapterOperations<
@@ -19,4 +20,10 @@ public class FranchiseAdapter extends ReactiveAdapterOperations<
         super(repository, mapper, d -> mapper.map(d, Franchise.class));
     }
 
+    @Override
+    public Mono<Franchise> updateName(Franchise franchise) {
+        return repository.updateName(franchise.getId(), franchise.getName())
+                .flatMap(rowsUpdated -> repository.findById(franchise.getId()))
+                .map(this::toEntity);
+    }
 }
