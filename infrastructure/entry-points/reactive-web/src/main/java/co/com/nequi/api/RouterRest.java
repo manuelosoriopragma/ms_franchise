@@ -2,6 +2,7 @@ package co.com.nequi.api;
 
 import co.com.nequi.api.handler.BranchHandler;
 import co.com.nequi.api.handler.FranchiseHandler;
+import co.com.nequi.api.handler.ProductHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -13,8 +14,10 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class RouterRest {
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(FranchiseHandler franchiseHandler, BranchHandler branchHandler) {
+    public RouterFunction<ServerResponse> routerFunction(FranchiseHandler franchiseHandler
+            , BranchHandler branchHandler, ProductHandler productHandler) {
         return route(POST("/franchise/create"), franchiseHandler::createFranchise)
-                .andRoute(POST("/branch/assign"), branchHandler::assingBranch);
+                .andRoute(POST("/branch/assign"), branchHandler::assingBranch)
+                .andRoute(POST("/product/save"), productHandler::saveProduct);
     }
 }
