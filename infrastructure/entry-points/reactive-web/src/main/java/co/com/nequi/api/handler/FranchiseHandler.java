@@ -1,6 +1,7 @@
 package co.com.nequi.api.handler;
 
 import co.com.nequi.api.dto.FranchiseDto;
+import co.com.nequi.api.dto.UpdateNameFranchiseDto;
 import co.com.nequi.api.helper.ResponseUtil;
 import co.com.nequi.api.helper.ValidationUtil;
 import co.com.nequi.api.mapper.FranchiseMapper;
@@ -27,6 +28,18 @@ public class FranchiseHandler {
                 .flatMap(validationUtil::validate)
                 .map(FranchiseMapper::toDomain)
                 .flatMap(useCase::saveFranchise)
+                .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
+                .flatMap(response -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response));
+    }
+
+    @Transactional
+    public Mono<ServerResponse> updateName(ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(UpdateNameFranchiseDto.class)
+                .flatMap(validationUtil::validate)
+                .map(FranchiseMapper::toDomain)
+                .flatMap(useCase::updateName)
                 .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
                 .flatMap(response -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)

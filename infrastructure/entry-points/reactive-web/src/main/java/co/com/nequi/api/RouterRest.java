@@ -22,11 +22,13 @@ public class RouterRest {
     public RouterFunction<ServerResponse> routerFunction(FranchiseHandler franchiseHandler
             , BranchHandler branchHandler, ProductHandler productHandler) {
         return route(POST("/franchise/create"), franchiseHandler::createFranchise)
+                .andRoute(PUT("/franchise/rename"), franchiseHandler::updateName)
                 .andRoute(POST("/branch/assign"), branchHandler::assingBranch)
                 .andRoute(POST("/product/save"), productHandler::saveProduct)
                 .andRoute(DELETE("/product/{".concat(PRODUCT_ID_PARAM).concat("}")), productHandler::deleteProduct)
                 .andRoute(PUT("/product/updateStock"), productHandler::updateStock)
                 .andRoute(GET("/product/maxStockProducts/{".concat(FRANCHISE_ID_PARAM).concat("}")),
                         productHandler::findProductsWithMaxStockByFranchise);
+
     }
 }
