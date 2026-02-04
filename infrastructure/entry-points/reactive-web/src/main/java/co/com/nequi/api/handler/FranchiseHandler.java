@@ -2,6 +2,7 @@ package co.com.nequi.api.handler;
 
 import co.com.nequi.api.dto.FranchiseDto;
 import co.com.nequi.api.helper.ResponseUtil;
+import co.com.nequi.api.helper.ValidationUtil;
 import co.com.nequi.api.mapper.FranchiseMapper;
 import co.com.nequi.model.enums.ProcessMessage;
 import co.com.nequi.usecase.franchise.FranchiseUseCase;
@@ -17,9 +18,11 @@ import reactor.core.publisher.Mono;
 public class FranchiseHandler {
 
     private final FranchiseUseCase useCase;
+    private final ValidationUtil validationUtil;
 
     public Mono<ServerResponse> createFranchise(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(FranchiseDto.class)
+                .flatMap(validationUtil::validate)
                 .map(FranchiseMapper::toDomain)
                 .flatMap(useCase::saveFranchise)
                 .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
