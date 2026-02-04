@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface FranchiseGateway {
 
-    Mono<Franchise> save(Franchise franchise);
+    Mono<Franchise> saveFranchise(Franchise franchise);
 }

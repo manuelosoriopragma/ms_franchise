@@ -1,16 +1,14 @@
-package co.com.nequi.model.franchise;
+package co.com.nequi.api.dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-public class Franchise {
-    private Long id;
+@Builder(toBuilder = true)
+public class FranchiseDto {
     private String name;
 }

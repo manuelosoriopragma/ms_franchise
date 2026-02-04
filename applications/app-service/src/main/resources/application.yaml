@@ -6,7 +6,7 @@ spring:
   devtools:
     add-properties: false
   profiles:
-    include: ${PROFILE}
+    active: ${PROFILE}
 management:
   endpoints:
     web:
@@ -18,3 +18,11 @@ management:
         enabled: true
 cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"
+
+adapters:
+  r2dbc:
+    host: ${DB_HOST}
+    port: ${DB_PORT}
+    database: ${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
