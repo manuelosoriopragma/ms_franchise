@@ -15,4 +15,13 @@ public record ProductUseCase(ProductGateway productGateway, BranchGateway branch
                 .thenReturn(product)
                 .flatMap(productGateway::save);
     }
+
+    public Mono<Product> deleteProduct(Long productId){
+        return productGateway.findById(productId)
+                .switchIfEmpty(Mono.error(new BusinessException(ProcessMessage.INVALID_PRODUCT)))
+                .flatMap(product -> productGateway.deleteById(product.getId())
+                        .thenReturn(product)
+                );
+
+    }
 }

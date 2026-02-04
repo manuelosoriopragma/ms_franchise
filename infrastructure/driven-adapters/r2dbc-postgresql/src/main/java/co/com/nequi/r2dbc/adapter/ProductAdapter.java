@@ -7,6 +7,7 @@ import co.com.nequi.r2dbc.helper.ReactiveAdapterOperations;
 import co.com.nequi.r2dbc.repository.ProductRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class ProductAdapter extends ReactiveAdapterOperations<
@@ -19,4 +20,8 @@ public class ProductAdapter extends ReactiveAdapterOperations<
         super(repository, mapper, d -> mapper.map(d, Product.class));
     }
 
+    @Override
+    public Mono<Void> deleteById(Long productId) {
+        return repository.deleteById(productId);
+    }
 }

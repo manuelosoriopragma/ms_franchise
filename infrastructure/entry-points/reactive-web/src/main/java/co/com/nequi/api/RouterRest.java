@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static co.com.nequi.api.helper.Constants.PRODUCT_ID_PARAM;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -18,6 +20,7 @@ public class RouterRest {
             , BranchHandler branchHandler, ProductHandler productHandler) {
         return route(POST("/franchise/create"), franchiseHandler::createFranchise)
                 .andRoute(POST("/branch/assign"), branchHandler::assingBranch)
-                .andRoute(POST("/product/save"), productHandler::saveProduct);
+                .andRoute(POST("/product/save"), productHandler::saveProduct)
+                .andRoute(DELETE("/product/{".concat(PRODUCT_ID_PARAM).concat("}")), productHandler::deleteProduct);
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import static co.com.nequi.api.helper.Constants.PRODUCT_ID_PARAM;
+
 @Component
 @RequiredArgsConstructor
 public class ProductHandler {
@@ -27,6 +29,17 @@ public class ProductHandler {
                 .flatMap(validationUtil::validate)
                 .map(ProductMapper::toDomain)
                 .flatMap(useCase::saveProduct)
+                .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
+                .flatMap(response -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response));
+    }
+
+    @Transactional
+    public Mono<ServerResponse> deleteProduct(ServerRequest serverRequest){
+        final Long productId = Long.parseLong(serverRequest.pathVariable(PRODUCT_ID_PARAM));
+        return Mono.just(productId)
+                .flatMap(useCase::deleteProduct)
                 .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
                 .flatMap(response -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
