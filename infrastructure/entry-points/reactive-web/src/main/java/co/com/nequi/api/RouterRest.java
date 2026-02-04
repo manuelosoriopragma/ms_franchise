@@ -1,5 +1,6 @@
 package co.com.nequi.api;
 
+import co.com.nequi.api.handler.FranchiseHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -12,9 +13,9 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @Configuration
 public class RouterRest {
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(Handler handler) {
-        return route(GET("/api/usecase/path"), handler::listenGETUseCase)
-                .andRoute(POST("/api/usecase/otherpath"), handler::listenPOSTUseCase)
-                .and(route(GET("/api/otherusercase/path"), handler::listenGETOtherUseCase));
+    public RouterFunction<ServerResponse> routerFunction(FranchiseHandler franchiseHandler) {
+        return route(POST("/franchise/create"), franchiseHandler::createFranchise)
+                .andRoute(POST("/api/usecase/otherpath"), franchiseHandler::listenPOSTUseCase)
+                .and(route(GET("/api/otherusercase/path"), franchiseHandler::listenGETOtherUseCase));
     }
 }
