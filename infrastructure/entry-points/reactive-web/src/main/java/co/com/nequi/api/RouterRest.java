@@ -24,9 +24,11 @@ public class RouterRest {
         return route(POST("/franchise/create"), franchiseHandler::createFranchise)
                 .andRoute(PUT("/franchise/rename"), franchiseHandler::updateName)
                 .andRoute(POST("/branch/assign"), branchHandler::assingBranch)
+                .andRoute(PUT("/branch/rename"), branchHandler::updateName)
                 .andRoute(POST("/product/save"), productHandler::saveProduct)
                 .andRoute(DELETE("/product/{".concat(PRODUCT_ID_PARAM).concat("}")), productHandler::deleteProduct)
                 .andRoute(PUT("/product/updateStock"), productHandler::updateStock)
+                .andRoute(PUT("/product/rename"), productHandler::updateName)
                 .andRoute(GET("/product/maxStockProducts/{".concat(FRANCHISE_ID_PARAM).concat("}")),
                         productHandler::findProductsWithMaxStockByFranchise);
 

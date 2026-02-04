@@ -1,12 +1,10 @@
 package co.com.nequi.api.mapper;
 
-import co.com.nequi.api.dto.BranchDto;
 import co.com.nequi.api.dto.ProductDto;
+import co.com.nequi.api.dto.UpdateNameProductDto;
 import co.com.nequi.api.dto.UpdateStockProductDto;
-import co.com.nequi.model.branch.Branch;
 import co.com.nequi.model.product.Product;
 import lombok.experimental.UtilityClass;
-import org.springframework.data.relational.core.sql.UpdateBuilder;
 
 @UtilityClass
 public class ProductMapper {
@@ -23,6 +21,13 @@ public class ProductMapper {
         return Product.builder()
                 .id(dto.getId())
                 .stock(dto.getStock())
+                .build();
+    }
+
+    public static Product toDomain(UpdateNameProductDto dto){
+        return Product.builder()
+                .id(dto.getId())
+                .name(dto.getName())
                 .build();
     }
 

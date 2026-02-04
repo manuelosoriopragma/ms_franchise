@@ -15,4 +15,10 @@ public record BranchUseCase(BranchGateway branchGateway, FranchiseGateway franch
                 .thenReturn(branch)
                 .flatMap(branchGateway::save);
     }
+
+    public Mono<Branch> updateName(Branch branch){
+        return branchGateway.findById(branch.getId())
+                .switchIfEmpty(Mono.error(new BusinessException(ProcessMessage.INVALID_BRANCH)))
+                .flatMap(b -> branchGateway.updateName(branch));
+    }
 }

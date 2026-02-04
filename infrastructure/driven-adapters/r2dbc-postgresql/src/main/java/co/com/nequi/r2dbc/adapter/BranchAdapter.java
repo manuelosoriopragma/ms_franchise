@@ -11,6 +11,7 @@ import co.com.nequi.r2dbc.repository.BranchRepository;
 import co.com.nequi.r2dbc.repository.FranchiseRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 @Repository
 public class BranchAdapter extends ReactiveAdapterOperations<
@@ -23,4 +24,10 @@ public class BranchAdapter extends ReactiveAdapterOperations<
         super(repository, mapper, d -> mapper.map(d, Branch.class));
     }
 
+    @Override
+    public Mono<Branch> updateName(Branch branch) {
+        return repository.updateName(branch.getId(), branch.getName())
+                .flatMap(rowsUpdated -> repository.findById(branch.getId()))
+                .map(this::toEntity);
+    }
 }
