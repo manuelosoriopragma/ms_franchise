@@ -1,5 +1,6 @@
-package co.com.nequi.api.router;
+package co.com.nequi.api;
 
+import co.com.nequi.api.handler.BranchHandler;
 import co.com.nequi.api.handler.FranchiseHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +11,10 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class BranchRouterRest {
+public class RouterRest {
     @Bean
-    public RouterFunction<ServerResponse> branchRouterFunction(FranchiseHandler franchiseHandler) {
-        return route(POST("/franchise/create"), franchiseHandler::createFranchise);
+    public RouterFunction<ServerResponse> routerFunction(FranchiseHandler franchiseHandler, BranchHandler branchHandler) {
+        return route(POST("/franchise/create"), franchiseHandler::createFranchise)
+                .andRoute(POST("/branch/assign"), branchHandler::assingBranch);
     }
 }
