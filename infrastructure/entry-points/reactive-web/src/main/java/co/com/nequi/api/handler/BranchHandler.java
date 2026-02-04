@@ -1,6 +1,7 @@
 package co.com.nequi.api.handler;
 
 import co.com.nequi.api.dto.BranchDto;
+import co.com.nequi.api.dto.UpdateNameBranchDto;
 import co.com.nequi.api.helper.ResponseUtil;
 import co.com.nequi.api.helper.ValidationUtil;
 import co.com.nequi.api.mapper.BranchMapper;
@@ -26,6 +27,18 @@ public class BranchHandler {
                 .flatMap(validationUtil::validate)
                 .map(BranchMapper::toDomain)
                 .flatMap(useCase::assingBranch)
+                .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
+                .flatMap(response -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response));
+    }
+
+    @Transactional
+    public Mono<ServerResponse> updateName(ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(UpdateNameBranchDto.class)
+                .flatMap(validationUtil::validate)
+                .map(BranchMapper::toDomain)
+                .flatMap(useCase::updateName)
                 .map(domain -> ResponseUtil.responseSuccessful(domain, ProcessMessage.SUCCESS_OPERATION))
                 .flatMap(response -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)

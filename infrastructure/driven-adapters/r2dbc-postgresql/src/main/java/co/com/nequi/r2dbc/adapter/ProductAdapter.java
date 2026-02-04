@@ -34,6 +34,13 @@ public class ProductAdapter extends ReactiveAdapterOperations<
     }
 
     @Override
+    public Mono<Product> updateName(Product product) {
+        return repository.updateName(product.getId(), product.getName())
+                .flatMap(rowsUpdated -> repository.findById(product.getId()))
+                .map(this::toEntity);
+    }
+
+    @Override
     public Flux<Product> findProductsWithMaxStockByFranchise(Long franchiseId) {
         return repository.findProductsWithMaxStockByFranchise(franchiseId)
                 .map(this::toEntity);

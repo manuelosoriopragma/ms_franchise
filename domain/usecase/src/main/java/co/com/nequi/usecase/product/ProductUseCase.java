@@ -35,6 +35,13 @@ public record ProductUseCase(ProductGateway productGateway, BranchGateway branch
                 .flatMap(productGateway::updateStock);
     }
 
+    public Mono<Product> updateName(Product product){
+        return productGateway.findById(product.getId())
+                .switchIfEmpty(Mono.error(new BusinessException(ProcessMessage.INVALID_PRODUCT)))
+                .thenReturn(product)
+                .flatMap(productGateway::updateName);
+    }
+
     public Flux<Product> findProductsWithMaxStockByFranchise(Long franchiseId){
         return franchiseGateway.findById(franchiseId)
                         .switchIfEmpty(Mono.error(new BusinessException(ProcessMessage.INVALID_FRANCHISE)))
