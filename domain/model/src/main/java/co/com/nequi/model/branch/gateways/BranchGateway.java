@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 public interface BranchGateway {
 
     Mono<Branch> save(Branch branch);
+
+    Mono<Branch> findById(Long branchId);
 }
