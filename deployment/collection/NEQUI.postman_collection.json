@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "130c4167-5768-4535-a807-2fe395eff30b",
+		"name": "NEQUI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32003847",
+		"_collection_link": "https://restless-zodiac-138880.postman.co/workspace/4814eecb-15cf-4649-83f0-5592795c02c7/collection/32003847-130c4167-5768-4535-a807-2fe395eff30b?action=share&source=collection_link&creator=32003847"
+	},
+	"item": [
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "save franchise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Franchise 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/franchise/create",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"franchise",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "franchise rename",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/franchise/rename",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"franchise",
+						"rename"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assing branch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"name\": \"sucursal 1\",\r\n    \"franchiseId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/branch/assign",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"branch",
+						"assign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update name - branch",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"branh updated\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/branch/rename",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"branch",
+						"rename"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"name\": \"product 1\",\r\n    \"branchId\": 6,\r\n    \"stock\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/product/save",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"product",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/product/:productId",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"product",
+						":productId"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update stock - product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"stock\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/product/updateStock",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"product",
+						"updateStock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"product updated\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/product/rename",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"product",
+						"rename"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "max stock products",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
